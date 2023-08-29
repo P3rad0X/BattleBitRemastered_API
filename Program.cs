@@ -63,9 +63,7 @@ internal class MyGameServer : GameServer<MyPlayer>
 
     public override async Task OnRoundStarted()
     {
-        string gameMap = Map;
-        int playerCount = CurrentPlayerCount;
-        string message = $"{playerCount} players";
+        string message = "A round has started on " + Map + " with " + $"{CurrentPlayerCount} players";
         Program.SendWebhookMessage(message);
        
 
