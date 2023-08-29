@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleBitRemastered_API", "BattleBitRemastered_API.csproj", "{8AB63888-B1FD-496E-9ED0-86D8A75F5888}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8AB63888-B1FD-496E-9ED0-86D8A75F5888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB63888-B1FD-496E-9ED0-86D8A75F5888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB63888-B1FD-496E-9ED0-86D8A75F5888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB63888-B1FD-496E-9ED0-86D8A75F5888}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E221136-E8D6-41A3-B90E-D46C4436A0F1}
+	EndGlobalSection
+EndGlobal
