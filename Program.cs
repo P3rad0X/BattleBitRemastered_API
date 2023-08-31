@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.Json;
 using BattleBitAPI;
 using BattleBitAPI.Common;
@@ -11,6 +12,8 @@ internal static class Program
     public const string DiscordWebhookUrl = "https://discord.com/api/webhooks/1146078070378348544/yYc9L0mjDbzuWpPJUzTKekouVTdsBd7x7gKNk6Zxtu8HWo13dbHy45ZDIZZvj1RRLFkJ";
 
     public static HttpClient Client;
+
+   
 
     private static void Main(string[] args)
     {
@@ -36,6 +39,7 @@ internal static class Program
     {
         Console.WriteLine("Log (" + level + "): " + msg);
     }
+
 
 
 }
@@ -75,26 +79,47 @@ internal class MyGameServer : GameServer<MyPlayer>
 
     public override async Task OnPlayerDisconnected(MyPlayer player)
     {
-        await SendDiscordMessage($"{player.Name} disconnected from {player.GameServer.ServerName}");
+        await SendDiscordMessage($"{player.Name} disconnected from the server");
     }
 
     public override async Task OnPlayerConnected(MyPlayer player)
     {
-        await SendDiscordMessage($"{player.Name} connected to {player.GameServer.ServerName}");
+        ForceStartGame();
+        await SendDiscordMessage($"{player.Name} has connected to the server");
     }
 
     public override async Task<bool> OnPlayerTypedMessage(MyPlayer player, ChatChannel channel, string msg)
     {
-        // Keep in mind that this application could listen to multiple servers.
-        await SendDiscordMessage($"{player.GameServer.ServerName} - {player.Name}: {msg}");
+       
+        Console.WriteLine("Entering OnPlayerTypedMessage method.");
 
-        // You can return false to block certain message from being posted in the chat.
-        // But we still post it to our webhook to monitor it from Discord.
-        if (msg.Contains("nice cars"))
-            return false;
+        List<string> profaneWords = new List<string>(File.ReadAllLines("profane_words.txt", Encoding.UTF8));
+
+        Console.WriteLine($"Number of profane words: {profaneWords.Count}");
+
+        await SendDiscordMessage($"{player.GameServer.ServerName} - {player.Name}: {msg}");
+        foreach (string profaneWord in profaneWords)
+        {
+            if (msg.Contains(profaneWord, StringComparison.OrdinalIgnoreCase))
+            {
+                player.Message("Please do not use profanity in chat.", 10f);
+                return false;
+            }
+
+
+        }
 
         return true;
+
     }
+
+
+
+
+
+
+
+
 
     // Sends a Discord message by sending a POST request to our webhook.
     // Use embeds if you want to make it look nicer.
